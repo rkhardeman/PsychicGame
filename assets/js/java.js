@@ -21,16 +21,15 @@ var updateGuessesLeft = function(){
 
 //this will be called after reset to change computers letter selection
 var updateComputerLetter = function() {
-  ComputerLetter = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+  computerLetter = computerChoice[Math.floor(Math.random() * computerChoice.length)];
 };
 
 // reset for after winning or losing...
-var reset = function() {
+var resetAll = function() {
   guessesLeft = 10;
   lettersGuessed = [];
   updateComputerLetter();
   updateGuessesLeft();
-
 };
 
 
@@ -46,18 +45,18 @@ document.onkeyup = function(event) {
 		updateGuessesLeft();
 	// updateLettersGuessed();
 
-		if (guessesLeft > 0){
+		if (guessesLeft > -1){
 			if (userGuess === computerLetter){
 				wins ++;
 				document.querySelector('#wins').innerHTML = "Wins: " + wins;
                 alert("You win!");
-                reset();
+                resetAll();
 			}
-		}else if (guessesLeft === 0){
+		}else if (guessesLeft === -1){
 			losses ++;
 			document.querySelector('#losses').innerHTML = "Losses: " + losses;
 			alert("You lose. Sorry!");
-			reset();
+			resetAll();
 		}
 
 }
