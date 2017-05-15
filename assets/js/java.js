@@ -9,6 +9,7 @@ var wins = 0;
 var losses = 0;
 var guessesLeft = 10;
 var lettersGuessed = [];
+var userGuess = [];
 var computerLetter = null;
 
 //computer selects random letter
@@ -17,6 +18,19 @@ var computerLetter = computerChoice[Math.floor(Math.random() * computerChoice.le
 // //update guessesLeft when called
 var updateGuessesLeft = function(){
 	document.querySelector("#guessesLeft").innerHTML = "Guesses Left: " + guessesLeft;
+}
+
+
+var updateLettersGuessed = function (){
+	var lettersGuessedString = '';
+	for (var i = 0; i < userGuess.length; i++){
+		if(userGuess.length == 1 || i == (userGuess.length - 1)){
+			lettersGuessedString += userGuess[i];
+		} else {
+			lettersGuessedString += userGuess[i] + ", ";
+		}
+	}
+	document.querySelector('#lettersGuessed').innerHTML = "Your guesses so far: " + lettersGuessedString;
 }
 
 //this will be called after reset to change computers letter selection
@@ -28,22 +42,22 @@ var updateComputerLetter = function() {
 var resetAll = function() {
   guessesLeft = 10;
   lettersGuessed = [];
+  userGuess = [];
   updateComputerLetter();
   updateGuessesLeft();
+  updateLettersGuessed();
 };
 
 
 //on key up excute 
 document.onkeyup = function(event) {
-	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+	 userGuess.push(String.fromCharCode(event.keyCode).toLowerCase());
 
     	//decrease guesses on key up
         guessesLeft --;
 
-	//push letter to userGuess, update guesses remaining and letters guessed
-	// lettersGuessed.push(userGuess);
-		updateGuessesLeft();
-	// updateLettersGuessed();
+	updateGuessesLeft();
+	updateLettersGuessed();
 
 		if (guessesLeft > -1){
 			if (userGuess === computerLetter){
