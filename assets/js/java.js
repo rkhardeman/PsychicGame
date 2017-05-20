@@ -14,6 +14,7 @@ var computerLetter = null;
 
 //computer selects random letter
 var computerLetter = computerChoice[Math.floor(Math.random() * computerChoice.length)];
+// console.log(computerLetter);
 
 
 // //update guessesLeft when called
@@ -61,13 +62,13 @@ document.onkeyup = function(event) {
 	updateLettersGuessed();
 
 		if (guessesLeft > 0){
-			if (userGuess === computerLetter){
+			if (userGuess == computerLetter){
 				wins ++;
 				document.querySelector('#wins').innerHTML = "Wins: " + wins;
                 alert("You win!");
                 resetAll();
 			}
-		}else if (guessesLeft === 0 ){
+		}else if (guessesLeft == 0 ){
 			losses ++;
 			document.querySelector('#losses').innerHTML = "Losses: " + losses;
 			alert("You lose. Sorry!");
